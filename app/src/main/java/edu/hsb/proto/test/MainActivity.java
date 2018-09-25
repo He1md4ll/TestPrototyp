@@ -1,8 +1,8 @@
 package edu.hsb.proto.test;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import javax.inject.Inject;
 
@@ -15,6 +15,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // TODO: Fragmente
+        // TODO: Navigation
+        // TODO: UI Map, Login, Prefs
+        // TODO: Permission Handling
+        // TODO: Bound Service for Location updates
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
