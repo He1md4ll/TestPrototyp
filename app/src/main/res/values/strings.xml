@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">TestPrototyp</string>
+    <string name="app_description">Prototyp App for Master Thesis</string>
+
+    <string name="ok">OK</string>
+    <string name="reason">Please grant this very important permission :)</string>
+    <string name="rejected">Permission Rejected :(</string>
+    <string name="change_setting">Settings</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="menu_activity_map">Map</string>
+    <string name="menu_activity_login">Login</string>
+
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAokSzPCXN1p6RUv6yKngG1ZMKgN8CxQUo</string>
+    <string name="login_hint_username">Username</string>
+    <string name="login_hint_password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="login_title_rounds">Hash Rounds: %1$d</string>
+    <string name="login_encryption">Encryption?</string>
 </resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,8 +17,8 @@
         android:layout_height="wrap_content"
         android:enabled="false"
         android:src="@drawable/baseline_play_arrow_24"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
         android:tint="@color/white"
-        app:layout_anchor="@+id/bottom_sheet_layout"
-        app:layout_anchorGravity="bottom|end" />
+        android:layout_gravity="bottom|end" />
 </android.support.design.widget.CoordinatorLayout>

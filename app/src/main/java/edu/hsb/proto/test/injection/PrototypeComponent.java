@@ -10,7 +10,7 @@ import dagger.android.AndroidInjectionModule;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 @Singleton
-@Component(modules = {AndroidInjectionModule.class, AndroidSupportInjectionModule.class, PrototypeModule.class})
+@Component(modules = {AndroidInjectionModule.class, AndroidSupportInjectionModule.class, PrototypeModule.class, ComponentBuilder.class})
 public interface PrototypeComponent {
 
     void inject(PrototypeApp app);

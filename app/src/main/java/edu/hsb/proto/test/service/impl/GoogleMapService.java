@@ -10,6 +10,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import edu.hsb.proto.test.R;
 import edu.hsb.proto.test.service.IMapProviderCallback;
@@ -38,14 +39,29 @@ public class GoogleMapService implements IMapService, OnMapReadyCallback {
         final Fragment fragment = fragmentManager.findFragmentById(R.id.map_wrapper);
         fragmentManager.beginTransaction().remove(fragment).commitAllowingStateLoss();
 
+        this.map = null;
         this.context = null;
         this.mapProviderCallback = null;
+    }
+
+    @Override
+    public void clearMap() {
+        if (map != null) {
+            map.clear();
+        }
     }
 
     @Override
     public void centerOnLocation(LatLng latLng) {
         if (map != null) {
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+        }
+    }
+
+    @Override
+    public void markLocation(LatLng latLng) {
+        if (map != null) {
+            map.addMarker(new MarkerOptions().position(latLng).title("My Location"));
         }
     }
 
