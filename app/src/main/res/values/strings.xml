@@ -16,7 +16,8 @@
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAokSzPCXN1p6RUv6yKngG1ZMKgN8CxQUo</string>
     <string name="login_hint_username">Username</string>
     <string name="login_hint_password">Password</string>
-    <string name="login_button">Login</string>
+    <string name="login_online_button">Login Online</string>
+    <string name="login_offline_button">Login Offline</string>
     <string name="login_title_rounds">Hash Rounds: %1$d</string>
     <string name="login_encryption">Encryption?</string>
 </resources>

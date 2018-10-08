@@ -4,9 +4,9 @@ import com.google.android.gms.location.LocationRequest;
 
 public enum LocationAccuracy {
 
-    EXACT(10 * 1000, 3 * 1000, 10, LocationRequest.PRIORITY_HIGH_ACCURACY),
-    BALANCE(30 * 1000, 10 * 1000, 100, LocationRequest.PRIORITY_HIGH_ACCURACY),
-    POWER(60 * 1000, 20 * 1000, 500, LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+    HIGH(0, 0, 0, LocationRequest.PRIORITY_HIGH_ACCURACY),
+    BALANCE(1, 5, 1, LocationRequest.PRIORITY_HIGH_ACCURACY),
+    LOW(5, 10, 1, LocationRequest.PRIORITY_HIGH_ACCURACY);
 
     private int interval;
     private int passiveInterval;

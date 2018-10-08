@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
 import android.content.BroadcastReceiver;
+import android.os.StrictMode;
 
 import com.squareup.leakcanary.LeakCanary;
 
@@ -33,6 +34,7 @@ public class PrototypeApp extends Application implements HasActivityInjector,
                 .build()
                 .inject(this);
         setupLeakCanary();
+        enabledStrictMode();
     }
 
     @Override
@@ -53,5 +55,14 @@ public class PrototypeApp extends Application implements HasActivityInjector,
     protected void setupLeakCanary() {
         if (LeakCanary.isInAnalyzerProcess(this)) return;
         LeakCanary.install(this);
+    }
+
+    private void enabledStrictMode() {
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .permitDiskReads()
+                .penaltyLog()
+                .penaltyFlashScreen()
+                .build());
     }
 }

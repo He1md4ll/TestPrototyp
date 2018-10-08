@@ -58,25 +58,13 @@ public class MainActivity extends PermissionBase implements HasSupportFragmentIn
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (!item.isChecked()) {
-            //navigationView.getMenu().findItem(R.id.nav_account).setTitle(user.getDisplayName());
             performFragmentTransaction(item.getItemId());
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    private void initViews() {
-        toolbar = findViewById(R.id.toolbar);
-        drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
 
-        setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-    }
 
     private void performFragmentTransaction(@IdRes int menuId) {
         switch (menuId) {
@@ -99,5 +87,18 @@ public class MainActivity extends PermissionBase implements HasSupportFragmentIn
                     .addToBackStack(null)
                     .commit();
         }
+    }
+
+    private void initViews() {
+        toolbar = findViewById(R.id.toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+
+        setSupportActionBar(toolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
     }
 }

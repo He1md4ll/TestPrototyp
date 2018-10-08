@@ -30,7 +30,8 @@ public class LoginFragment extends Fragment {
     private TextView roundsLabel;
     private SeekBar roundsSeekBar;
     private CheckBox encryptionCheckBox;
-    private Button loginButton;
+    private Button loginOnlineButton;
+    private Button loginOfflineButton;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,7 +53,8 @@ public class LoginFragment extends Fragment {
         roundsLabel = view.findViewById(R.id.login_rounds_label);
         roundsSeekBar = view.findViewById(R.id.login_rounds);
         encryptionCheckBox = view.findViewById(R.id.login_encryption);
-        loginButton = view.findViewById(R.id.login_button);
+        loginOnlineButton = view.findViewById(R.id.login_online_button);
+        loginOfflineButton = view.findViewById(R.id.login_offline_button);
 
         roundsLabel.setText(getString(R.string.login_title_rounds, roundsSeekBar.getProgress()));
         roundsSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -68,11 +70,20 @@ public class LoginFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
-        loginButton.setOnClickListener(v -> {
+        loginOnlineButton.setOnClickListener(v -> {
             final String passwordHash = loginService.hash(passwordText.getText().toString(),
                     roundsSeekBar.getProgress(),
                     encryptionCheckBox.isChecked());
-            final boolean result = loginService.login(usernameText.getText().toString(),
+            final boolean result = loginService.loginOnline(usernameText.getText().toString(),
+                    passwordHash);
+            Toast.makeText(LoginFragment.this.getContext(), "Result: " + result, Toast.LENGTH_LONG).show();
+        });
+
+        loginOfflineButton.setOnClickListener(v -> {
+            final String passwordHash = loginService.hash(passwordText.getText().toString(),
+                    roundsSeekBar.getProgress(),
+                    encryptionCheckBox.isChecked());
+            final boolean result = loginService.loginOffline(usernameText.getText().toString(),
                     passwordHash,
                     roundsSeekBar.getProgress(),
                     encryptionCheckBox.isChecked());
