@@ -57,7 +57,7 @@ public class PrototypeApp extends Application implements HasActivityInjector,
         LeakCanary.install(this);
     }
 
-    private void enabledStrictMode() {
+    protected void enabledStrictMode() {
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                 .detectAll()
                 .permitDiskReads()

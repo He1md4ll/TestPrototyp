@@ -1,8 +1,8 @@
 package edu.hsb.proto.test.base;
 
-import android.app.Application;
+import edu.hsb.proto.test.injection.PrototypeApp;
 
-public class UnitTestApp extends Application {
+public class UnitTestApp extends PrototypeApp {
 
     private UnitTestComponent component;
 

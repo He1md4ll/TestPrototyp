@@ -6,11 +6,13 @@ import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
-import edu.hsb.proto.test.ExampleInstrumentedTest;
-import edu.hsb.proto.test.injection.PrototypeModule;
+import dagger.android.AndroidInjectionModule;
+import dagger.android.support.AndroidSupportInjectionModule;
+import edu.hsb.proto.test.InjectionInstTest;
+import edu.hsb.proto.test.injection.ComponentBuilder;
 
 @Singleton
-@Component(modules = {PrototypeModule.class, UITestModule.class})
+@Component(modules = {AndroidInjectionModule.class, AndroidSupportInjectionModule.class, ComponentBuilder.class, UITestModule.class})
 public interface UITestComponent {
 
     @Component.Builder
@@ -25,5 +27,5 @@ public interface UITestComponent {
     /*
      * Inject declarations for UI Tests
      */
-    void inject(ExampleInstrumentedTest exampleInstrumentedTest);
+    void inject(InjectionInstTest injectionInstTest);
 }

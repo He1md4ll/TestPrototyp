@@ -15,12 +15,9 @@ import edu.hsb.proto.test.connection.ConnectionManager;
 import edu.hsb.proto.test.service.ILocationService;
 import edu.hsb.proto.test.service.ILoginService;
 import edu.hsb.proto.test.service.IMapService;
-import edu.hsb.proto.test.service.impl.DefaultLoginService;
-import edu.hsb.proto.test.service.impl.GoogleLocationService;
-import edu.hsb.proto.test.service.impl.GoogleMapService;
 
 @Module
-public class PrototypeModule {
+public class PrototypeModule extends BaseModule {
 
     @Provides
     @Singleton
@@ -31,42 +28,42 @@ public class PrototypeModule {
     @Provides
     @Singleton
     public PreferenceManager providePreferenceManager(Application application, SharedPreferences sharedPreferences) {
-        return new PreferenceManager(application, sharedPreferences);
+        return preferenceManager(application, sharedPreferences);
     }
 
     @Provides
     @Singleton
     public ConnectionManager provideConnectionManager(ConnectionInterceptor interceptor, ConnectivityManager connectivityManager) {
-        return new ConnectionManager(interceptor, connectivityManager);
+        return connectionManager(interceptor, connectivityManager);
     }
 
     @Provides
     public SharedPreferences provideSharedPreferences(Application application) {
-        return android.preference.PreferenceManager.getDefaultSharedPreferences(application);
+        return sharedPreferences(application);
     }
 
     @Provides
     public ConnectionInterceptor provideConnectionInterceptor(Application application) {
-        return new ConnectionInterceptor(application);
+        return connectionInterceptor(application);
     }
 
     @Provides
     public ConnectivityManager provideConnectivityManager(Application application) {
-        return (ConnectivityManager) application.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return connectivityManager(application);
     }
 
     @Provides
     public ILoginService provideLoginService(ConnectionManager connectionManager) {
-        return new DefaultLoginService(connectionManager);
+        return loginService(connectionManager);
     }
 
     @Provides
     public IMapService provideMapService() {
-        return new GoogleMapService();
+        return mapService();
     }
 
     @Provides
     public ILocationService provideLocationService(Application application, PreferenceManager preferenceManager) {
-        return new GoogleLocationService(application, preferenceManager);
+        return locationService(application, preferenceManager);
     }
 }

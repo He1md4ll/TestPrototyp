@@ -1,16 +1,17 @@
 package edu.hsb.proto.test.base;
 
-import android.app.Application;
+import edu.hsb.proto.test.injection.PrototypeApp;
 
-public class UITestApp extends Application {
+public class UITestApp extends PrototypeApp {
 
     private UITestComponent component;
 
     @Override
     public void onCreate() {
-        super.onCreate();
         component = buildComponent();
         component.inject(this);
+        setupLeakCanary();
+        enabledStrictMode();
     }
 
     protected UITestComponent buildComponent() {
