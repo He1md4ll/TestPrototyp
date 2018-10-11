@@ -8,7 +8,6 @@ public class UnitTestApp extends PrototypeApp {
 
     @Override
     public void onCreate() {
-        super.onCreate();
         component = buildComponent();
         component.inject(this);
     }

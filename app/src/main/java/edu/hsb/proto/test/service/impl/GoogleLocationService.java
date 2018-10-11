@@ -15,6 +15,7 @@ import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.Task;
 
 import edu.hsb.proto.test.PreferenceManager;
+import edu.hsb.proto.test.domain.LocationAccuracy;
 import edu.hsb.proto.test.service.ILocationListener;
 import edu.hsb.proto.test.service.ILocationService;
 
@@ -42,7 +43,10 @@ public class GoogleLocationService implements ILocationService {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
 
         // Define location request parameters
-        locationRequest = preferenceManager.getLocationAccuracy().getLocationRequest();
+        final LocationAccuracy locationAccuracy = preferenceManager.getLocationAccuracy();
+        if (locationAccuracy != null) {
+            locationRequest = locationAccuracy.getLocationRequest();
+        }
 
         // Check device settings
         settingsClient = LocationServices.getSettingsClient(context);
