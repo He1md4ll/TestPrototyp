@@ -15,9 +15,9 @@ import retrofit2.Response;
 public class DefaultLoginService implements ILoginService {
 
     private static final String TAG = DefaultLoginService.class.getSimpleName();
-    private static final String SUPER_SECRET_KEY = "3jx2rf*dagf3bh#utf$f234!";
-    private static final String RIGHT_USERNAME = "martin";
-    private static final String RIGHT_PASSWORD = "Start123*";
+    public static final String SUPER_SECRET_KEY = "3jx2rf*dagf3bh#utf$f234!";
+    public static final String RIGHT_USERNAME = "martin";
+    public static final String RIGHT_PASSWORD = "Start123*";
 
     private ConnectionManager connectionManager;
 

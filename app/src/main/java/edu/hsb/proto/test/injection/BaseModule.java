@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.SettingsClient;
+
 import edu.hsb.proto.test.PreferenceManager;
 import edu.hsb.proto.test.connection.ConnectionInterceptor;
 import edu.hsb.proto.test.connection.ConnectionManager;
@@ -45,7 +49,15 @@ public abstract class BaseModule {
         return new GoogleMapService();
     }
 
-    public ILocationService locationService(Application application, PreferenceManager preferenceManager) {
-        return new GoogleLocationService(application, preferenceManager);
+    public ILocationService locationService(PreferenceManager preferenceManager, FusedLocationProviderClient fusedLocationProviderClient, SettingsClient settingsClient) {
+        return new GoogleLocationService(preferenceManager, fusedLocationProviderClient, settingsClient);
+    }
+
+    public FusedLocationProviderClient fusedLocationProviderClient(Application application) {
+        return LocationServices.getFusedLocationProviderClient(application);
+    }
+
+    public SettingsClient settingsClient(Application application) {
+        return LocationServices.getSettingsClient(application);
     }
 }

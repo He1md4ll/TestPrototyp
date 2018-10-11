@@ -19,7 +19,7 @@ public class PreferenceManager {
     public static final String PREF_USERNAME = "pref_username";
     public static final String PREF_PASSWORD = "pref_password";
 
-    private static final String DEFAULT_PREF_ACCURACY = LocationAccuracy.BALANCE.name();
+    private static final String DEFAULT_PREF_ACCURACY = LocationAccuracy.HIGH.name();
 
     private SharedPreferences sharedPreferences;
     private Context context;

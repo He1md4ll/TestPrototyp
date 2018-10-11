@@ -9,6 +9,9 @@ import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 import dagger.android.support.AndroidSupportInjectionModule;
 import edu.hsb.proto.test.InjectionTest;
+import edu.hsb.proto.test.PerformanceTest;
+import edu.hsb.proto.test.SecurityTest;
+import edu.hsb.proto.test.ToughnessTest;
 import edu.hsb.proto.test.injection.ComponentBuilder;
 
 @Singleton
@@ -28,4 +31,7 @@ public interface UnitTestComponent {
      * Inject declarations for Unit Tests
      */
     void inject(InjectionTest injectionTest);
+    void inject(PerformanceTest performanceTest);
+    void inject(SecurityTest securityTest);
+    void inject(ToughnessTest toughnessTest);
 }

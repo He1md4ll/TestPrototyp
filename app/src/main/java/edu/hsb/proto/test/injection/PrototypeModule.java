@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.SettingsClient;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -63,7 +66,17 @@ public class PrototypeModule extends BaseModule {
     }
 
     @Provides
-    public ILocationService provideLocationService(Application application, PreferenceManager preferenceManager) {
-        return locationService(application, preferenceManager);
+    public ILocationService provideLocationService(PreferenceManager preferenceManager, FusedLocationProviderClient fusedLocationProviderClient, SettingsClient settingsClient) {
+        return locationService(preferenceManager, fusedLocationProviderClient, settingsClient);
+    }
+
+    @Provides
+    public FusedLocationProviderClient provideFusedLocationProviderClient(Application application) {
+        return fusedLocationProviderClient(application);
+    }
+
+    @Provides
+    public SettingsClient provideSettingsClient(Application application) {
+        return settingsClient(application);
     }
 }
