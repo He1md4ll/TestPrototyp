@@ -27,8 +27,10 @@ public class DefaultLoginService implements ILoginService {
 
     @Override
     public boolean loginOnline(String username, String passwordHash) {
-        boolean notEmpty = !TextUtils.isEmpty(username) && !TextUtils.isEmpty(passwordHash);
         boolean requestResult = Boolean.FALSE;
+        boolean empty = TextUtils.isEmpty(username) || TextUtils.isEmpty(passwordHash);
+        if (empty) return Boolean.FALSE;
+
         try {
             final Response<ResponseBody> response = connectionManager.getReqresTestApi()
                     .login(new User(username, passwordHash))
@@ -37,7 +39,7 @@ public class DefaultLoginService implements ILoginService {
         } catch (IOException e) {
             Log.w(TAG, "Error while executing request: " + e.getMessage(), e);
         }
-        return notEmpty && requestResult;
+        return requestResult;
     }
 
     @Override

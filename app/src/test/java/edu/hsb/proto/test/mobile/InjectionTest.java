@@ -1,4 +1,4 @@
-package edu.hsb.proto.test;
+package edu.hsb.proto.test.mobile;
 
 import android.location.Location;
 

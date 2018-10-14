@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ConnectionManager {
 
-    private static final String BASE = "https://reqres.in/";
+    public static final String BASE = "https://reqres.in/";
 
     private Retrofit retrofit;
     private Interceptor interceptor;

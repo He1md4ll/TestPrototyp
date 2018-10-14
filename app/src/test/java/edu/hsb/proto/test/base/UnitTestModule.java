@@ -47,6 +47,12 @@ public class UnitTestModule extends BaseModule {
         return mock(ConnectionManager.class);
     }
 
+    @RealWithMocks
+    @Provides
+    public ConnectionManager provideRealWithMocksConnectionManager(ConnectionInterceptor connectionInterceptor, ConnectivityManager connectivityManager) {
+        return connectionManager(connectionInterceptor, connectivityManager);
+    }
+
     @Real
     @Provides
     public SharedPreferences provideSharedPreferences(Application application) {

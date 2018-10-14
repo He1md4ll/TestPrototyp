@@ -1,4 +1,6 @@
-package edu.hsb.proto.test;
+package edu.hsb.proto.test.mobile;
+
+import com.google.common.truth.Truth;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +20,7 @@ import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ToughnessTest extends BaseUnitTest {
+public class ConnectivityTest extends BaseUnitTest {
 
     @Real
     @Inject
@@ -34,7 +36,7 @@ public class ToughnessTest extends BaseUnitTest {
     }
 
     @Before
-    public void init() throws IOException {
+    public void init() {
         chain = Mockito.mock(Interceptor.Chain.class);
         request = new Request.Builder().url("https://test.org").build();
         Mockito.when(chain.request()).thenReturn(request);
@@ -53,9 +55,10 @@ public class ToughnessTest extends BaseUnitTest {
         Mockito.when(chain.proceed(request)).thenReturn(response);
 
         // When
-        connectionInterceptor.intercept(chain);
+        final Response result = connectionInterceptor.intercept(chain);
 
         // Then
+        Truth.assertThat(result).isEqualTo(response);
         Mockito.verify(chain, Mockito.times(4)).proceed(request);
     }
 
@@ -72,9 +75,10 @@ public class ToughnessTest extends BaseUnitTest {
         Mockito.when(chain.proceed(request)).thenReturn(response);
 
         // When
-        connectionInterceptor.intercept(chain);
+        final Response result = connectionInterceptor.intercept(chain);
 
         // Then
+        Truth.assertThat(result).isEqualTo(response);
         Mockito.verify(chain, Mockito.times(1)).proceed(request);
     }
 }

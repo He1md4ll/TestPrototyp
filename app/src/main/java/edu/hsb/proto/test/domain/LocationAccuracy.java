@@ -8,10 +8,10 @@ public enum LocationAccuracy {
     BALANCE(1, 5, 1, LocationRequest.PRIORITY_HIGH_ACCURACY),
     LOW(5, 10, 1, LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-    private int interval;
-    private int passiveInterval;
-    private int smallestDisplacement;
-    private int priority;
+    int interval;
+    int passiveInterval;
+    int smallestDisplacement;
+    int priority;
 
     LocationAccuracy(int interval, int passiveInterval, int smallestDisplacement, int priority) {
         this.interval = interval;

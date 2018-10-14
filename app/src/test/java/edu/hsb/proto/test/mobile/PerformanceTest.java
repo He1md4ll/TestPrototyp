@@ -1,4 +1,4 @@
-package edu.hsb.proto.test;
+package edu.hsb.proto.test.mobile;
 
 import com.google.common.truth.Truth;
 
@@ -14,7 +14,7 @@ import edu.hsb.proto.test.service.ILoginService;
 
 public class PerformanceTest extends BaseUnitTest {
 
-    private static final Long PERFORMANCE_CAP = 1000L; //ms
+    private static final Long PERFORMANCE_CAP = 500L; //ms
 
     @RealWithMocks
     @Inject

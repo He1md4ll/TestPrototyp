@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import edu.hsb.proto.test.util.PermissionUtils;
 
-public class PermissionBase extends AppCompatActivity {
+public abstract class PermissionBase extends AppCompatActivity {
 
     private static final int LOCATION_PERMISSION_REQ_CODE = 200;
 
