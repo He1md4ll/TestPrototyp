@@ -50,7 +50,7 @@ public class MapFragment extends LocationBase implements IMapProviderCallback {
         fabMonitoring.setEnabled(Boolean.TRUE);
         fabMonitoring.setOnClickListener(v -> {
             if (!isLocationMonitoring()) {
-                startLocationMonitroing();
+                startLocationMonitoring();
                 fabMonitoring.setImageResource(R.drawable.baseline_stop_24);
             } else {
                 stopLocationMonitoring();

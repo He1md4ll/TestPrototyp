@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
@@ -21,10 +20,11 @@ public class GoogleLocationService implements ILocationService {
 
     private static final String TAG = GoogleLocationService.class.getSimpleName();
 
+    private PreferenceManager preferenceManager;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private SettingsClient settingsClient;
+
     private ILocationListener listener;
-    private LocationRequest locationRequest;
     private Location lastKnownLocation;
     private LocationCallback locationCallback = new LocationCallback() {
 
@@ -40,14 +40,9 @@ public class GoogleLocationService implements ILocationService {
     };
 
     public GoogleLocationService(PreferenceManager preferenceManager, FusedLocationProviderClient fusedLocationProviderClient, SettingsClient settingsClient) {
+        this.preferenceManager = preferenceManager;
         this.fusedLocationProviderClient = fusedLocationProviderClient;
         this.settingsClient = settingsClient;
-
-        // Define location request parameters
-        final LocationAccuracy locationAccuracy = preferenceManager.getLocationAccuracy();
-        if (locationAccuracy != null) {
-            locationRequest = locationAccuracy.getLocationRequest();
-        }
     }
 
     @Override
@@ -69,7 +64,9 @@ public class GoogleLocationService implements ILocationService {
                     Log.w(TAG, "Could not get last location: " + task.getException());
                 }
             });
-            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
+            final LocationAccuracy locationAccuracy = preferenceManager.getLocationAccuracy();
+            fusedLocationProviderClient.requestLocationUpdates(locationAccuracy.getLocationRequest(),
+                    locationCallback, null);
         } catch (SecurityException e) {
             Log.e(TAG, "Location permission denied: " + e.getMessage(), e);
         }
@@ -83,8 +80,9 @@ public class GoogleLocationService implements ILocationService {
 
     @Override
     public Task<LocationSettingsResponse> checkSettings() {
+        final LocationAccuracy locationAccuracy = preferenceManager.getLocationAccuracy();
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest);
+                .addLocationRequest(locationAccuracy.getLocationRequest());
         return settingsClient.checkLocationSettings(builder.build());
     }
 }

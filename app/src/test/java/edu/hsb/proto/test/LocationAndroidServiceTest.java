@@ -1,7 +1,5 @@
 package edu.hsb.proto.test;
 
-import android.os.RemoteException;
-
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
@@ -12,7 +10,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.robolectric.Robolectric;
 import org.robolectric.android.controller.ServiceController;
-import org.robolectric.shadows.ShadowServiceManager;
 
 import javax.inject.Inject;
 
@@ -86,14 +83,5 @@ public class LocationAndroidServiceTest extends BaseUnitTest {
         // Then
         Truth.assertThat(classUnderTest.isMonitoring()).isFalse();
         Mockito.verify(locationService).stop();
-    }
-
-    @Test
-    public void testUnbind() throws RemoteException {
-        // When
-        serviceController.unbind();
-
-        // Then
-        Truth.assertThat(ShadowServiceManager.listServices()).isNull();
     }
 }

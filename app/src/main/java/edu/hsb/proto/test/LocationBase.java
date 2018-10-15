@@ -40,7 +40,7 @@ public abstract class LocationBase extends Fragment implements ServiceConnection
     @Override
     public abstract void onLocationChanged(Location location);
 
-    public void startLocationMonitroing() {
+    public void startLocationMonitoring() {
         if (locationAndroidService != null) {
             locationAndroidService.startMonitoring(this);
         }

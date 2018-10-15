@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.tasks.Task;
@@ -69,5 +70,10 @@ public class LocationAndroidService extends Service {
         public LocationAndroidService getService() {
             return LocationAndroidService.this;
         }
+    }
+
+    @VisibleForTesting
+    public void setLocationServices(ILocationService locationServices) {
+        this.locationServices = locationServices;
     }
 }

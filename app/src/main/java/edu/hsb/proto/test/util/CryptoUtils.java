@@ -1,5 +1,7 @@
 package edu.hsb.proto.test.util;
 
+import android.util.Log;
+
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -8,6 +10,8 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 public class CryptoUtils {
+
+    private static final String TAG = CryptoUtils.class.getSimpleName();
 
     private static final char HEX_DIGITS[] =
             {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
@@ -32,7 +36,7 @@ public class CryptoUtils {
             md.update(data);
             return md.digest();
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Could not find hashing algorithm " + algorithm, e);
             return null;
         }
     }
@@ -60,7 +64,7 @@ public class CryptoUtils {
             mac.init(secretKey);
             return mac.doFinal(data);
         } catch (InvalidKeyException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Could not encrypt with HMAC " + algorithm, e);
             return null;
         }
     }

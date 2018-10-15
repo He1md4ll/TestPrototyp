@@ -14,6 +14,9 @@ import edu.hsb.proto.test.connection.ConnectionInterceptorTest;
 import edu.hsb.proto.test.connection.ConnectionManagerTest;
 import edu.hsb.proto.test.domain.LocationAccuracyTest;
 import edu.hsb.proto.test.injection.ComponentBuilder;
+import edu.hsb.proto.test.integration.LocationIntegrationTest;
+import edu.hsb.proto.test.integration.LoginIntegrationTest;
+import edu.hsb.proto.test.integration.PermissionIntegrationTest;
 import edu.hsb.proto.test.mobile.ConnectivityTest;
 import edu.hsb.proto.test.mobile.InjectionTest;
 import edu.hsb.proto.test.mobile.PerformanceTest;
@@ -37,11 +40,13 @@ public interface UnitTestComponent {
     /*
      * Inject declarations for Unit Tests
      */
+    // Mobile Component Tests
     void inject(InjectionTest injectionTest);
     void inject(PerformanceTest performanceTest);
     void inject(SecurityTest securityTest);
     void inject(ConnectivityTest connectivityTest);
 
+    // Functional Component Tests
     void inject(ConnectionInterceptorTest connectionInterceptorTest);
     void inject(ConnectionManagerTest connectionManagerTest);
     void inject(LocationAccuracyTest locationAccuracyTest);
@@ -49,4 +54,9 @@ public interface UnitTestComponent {
     void inject(GoogleLocationServiceTest googleLocationServiceTest);
     void inject(LocationAndroidServiceTest locationAndroidServiceTest);
     void inject(PreferenceManagerTest preferenceManagerTest);
+
+    // Integration Tests
+    void inject(LoginIntegrationTest loginIntegrationTest);
+    void inject(LocationIntegrationTest locationIntegrationTest);
+    void inject(PermissionIntegrationTest permissionIntegrationTest);
 }

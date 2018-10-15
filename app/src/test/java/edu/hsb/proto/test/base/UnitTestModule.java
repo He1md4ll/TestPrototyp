@@ -55,6 +55,12 @@ public class UnitTestModule extends BaseModule {
 
     @Real
     @Provides
+    public ConnectionManager provideRealConnectionManager(@Real ConnectionInterceptor connectionInterceptor, @Real ConnectivityManager connectivityManager) {
+        return connectionManager(connectionInterceptor, connectivityManager);
+    }
+
+    @Real
+    @Provides
     public SharedPreferences provideSharedPreferences(Application application) {
         return sharedPreferences(application);
     }
@@ -77,6 +83,12 @@ public class UnitTestModule extends BaseModule {
         return mock(ConnectivityManager.class);
     }
 
+    @Real
+    @Provides
+    public ConnectivityManager provideRealConnectivityManager(Application application) {
+        return connectivityManager(application);
+    }
+
     @Reusable
     @Provides
     public ILoginService provideLoginService() {
@@ -86,6 +98,12 @@ public class UnitTestModule extends BaseModule {
     @RealWithMocks
     @Provides
     public ILoginService provideRealWithMocksLoginService(ConnectionManager connectionManager) {
+        return loginService(connectionManager);
+    }
+
+    @Real
+    @Provides
+    public ILoginService provideRealLoginService(@Real ConnectionManager connectionManager) {
         return loginService(connectionManager);
     }
 
@@ -104,6 +122,12 @@ public class UnitTestModule extends BaseModule {
     @RealWithMocks
     @Provides
     public ILocationService provideRealWithMocksLocationService(PreferenceManager preferenceManager, FusedLocationProviderClient fusedLocationProviderClient, SettingsClient settingsClient) {
+        return locationService(preferenceManager, fusedLocationProviderClient, settingsClient);
+    }
+
+    @Real
+    @Provides
+    public ILocationService provideRealLocationService(@Real PreferenceManager preferenceManager, FusedLocationProviderClient fusedLocationProviderClient, SettingsClient settingsClient) {
         return locationService(preferenceManager, fusedLocationProviderClient, settingsClient);
     }
 

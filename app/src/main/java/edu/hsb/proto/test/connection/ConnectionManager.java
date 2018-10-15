@@ -1,6 +1,7 @@
 package edu.hsb.proto.test.connection;
 
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import java.io.IOException;
 
@@ -42,6 +43,7 @@ public class ConnectionManager {
     }
 
     private boolean isNetworkAvailable() {
-        return connectivityManager.getActiveNetworkInfo().isConnected();
+        final NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
