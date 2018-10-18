@@ -20,4 +20,5 @@
     <string name="login_offline_button">Login Offline</string>
     <string name="login_title_rounds">Hash Rounds: %1$d</string>
     <string name="login_encryption">Encryption?</string>
+    <string name="map_location">My Location:</string>
 </resources>

@@ -4,6 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.os.BatteryManager;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.SettingsClient;
+
+import org.mockito.Mockito;
 
 import dagger.Module;
 import dagger.Provides;
@@ -11,34 +17,27 @@ import edu.hsb.proto.test.PreferenceManager;
 import edu.hsb.proto.test.connection.ConnectionInterceptor;
 import edu.hsb.proto.test.connection.ConnectionManager;
 import edu.hsb.proto.test.injection.BaseModule;
+import edu.hsb.proto.test.injection.PrototypeApp;
 import edu.hsb.proto.test.service.ILocationService;
 import edu.hsb.proto.test.service.ILoginService;
 import edu.hsb.proto.test.service.IMapService;
-
-import static org.mockito.Mockito.mock;
 
 @Module
 public class UITestModule extends BaseModule {
 
     @Provides
-    public Context provideApplication(UITestApp application) {
+    public Context provideApplication(PrototypeApp application) {
         return application;
     }
 
     @Provides
-    public PreferenceManager providePreferenceManager() {
-        return mock(PreferenceManager.class);
-    }
-
-    @Real
-    @Provides
-    public PreferenceManager provideRealPreferenceManager(Application application, SharedPreferences sharedPreferences) {
+    public PreferenceManager providePreferenceManager(Application application, SharedPreferences sharedPreferences) {
         return preferenceManager(application, sharedPreferences);
     }
 
     @Provides
-    public ConnectionManager provideConnectionManager() {
-        return mock(ConnectionManager.class);
+    public ConnectionManager provideConnectionManager(ConnectionInterceptor interceptor, ConnectivityManager connectivityManager) {
+        return connectionManager(interceptor, connectivityManager);
     }
 
     @Provides
@@ -47,33 +46,48 @@ public class UITestModule extends BaseModule {
     }
 
     @Provides
-    public ConnectionInterceptor provideConnectionInterceptor() {
-        return mock(ConnectionInterceptor.class);
+    public ConnectionInterceptor provideConnectionInterceptor(Application application) {
+        return connectionInterceptor(application);
     }
 
     @Provides
-    public ConnectivityManager provideConnectivityManager() {
-        return mock(ConnectivityManager.class);
+    public ConnectivityManager provideConnectivityManager(Application application) {
+        return connectivityManager(application);
     }
 
     @Provides
-    public ILoginService provideLoginService() {
-        return mock(ILoginService.class);
+    public ILoginService provideLoginService(ConnectionManager connectionManager) {
+        return loginService(connectionManager);
     }
 
     @Provides
     public IMapService provideMapService() {
-        return mock(IMapService.class);
+        return mapService();
     }
 
     @Provides
-    protected ILocationService provideLocationService() {
-        return mock(ILocationService.class);
+    public ILocationService provideLocationService(PreferenceManager preferenceManager, FusedLocationProviderClient fusedLocationProviderClient, @Real SettingsClient settingsClient) {
+        return locationService(preferenceManager, fusedLocationProviderClient, settingsClient);
+    }
+
+    @Provides
+    public FusedLocationProviderClient provideFusedLocationProviderClient(Application application) {
+        return fusedLocationProviderClient(application);
     }
 
     @Real
     @Provides
-    protected ILocationService provideRealLocationService(Application application, @Real PreferenceManager preferenceManager) {
-        return super.locationService(application, preferenceManager);
+    public SettingsClient provideRealSettingsClient(Application application) {
+        return settingsClient(application);
+    }
+
+    @Provides
+    public SettingsClient provideSettingsClient() {
+        return Mockito.mock(SettingsClient.class);
+    }
+
+    @Provides
+    public BatteryManager provideBatteryManager(Application application) {
+        return (BatteryManager) application.getSystemService(Context.BATTERY_SERVICE);
     }
 }

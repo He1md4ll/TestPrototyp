@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -51,10 +52,12 @@ public class MapFragment extends LocationBase implements IMapProviderCallback {
         fabMonitoring.setOnClickListener(v -> {
             if (!isLocationMonitoring()) {
                 startLocationMonitoring();
+                fabMonitoring.setTag(R.drawable.baseline_stop_24);
                 fabMonitoring.setImageResource(R.drawable.baseline_stop_24);
             } else {
                 stopLocationMonitoring();
                 mapService.clearMap();
+                fabMonitoring.setTag(R.drawable.baseline_play_arrow_24);
                 fabMonitoring.setImageResource(R.drawable.baseline_play_arrow_24);
             }
         });
@@ -72,5 +75,6 @@ public class MapFragment extends LocationBase implements IMapProviderCallback {
         final LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         mapService.centerOnLocation(latLng);
         mapService.markLocation(latLng);
+        Toast.makeText(getContext(), getString(R.string.map_location) + location, Toast.LENGTH_LONG).show();
     }
 }
