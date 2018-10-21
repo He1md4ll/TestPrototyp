@@ -21,10 +21,12 @@ import edu.hsb.proto.test.PreferenceManager;
 import edu.hsb.proto.test.base.BaseUnitTest;
 import edu.hsb.proto.test.base.RealWithMocks;
 import edu.hsb.proto.test.base.UnitTestComponent;
+import edu.hsb.proto.test.domain.LocationAccuracy;
 import edu.hsb.proto.test.service.ILocationListener;
 import edu.hsb.proto.test.service.ILocationService;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -62,16 +64,14 @@ public class GoogleLocationServiceTest extends BaseUnitTest {
     @Test
     public void testStartSuccess() {
         // Given
-        ILocationListener locationListener = new ILocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                //Then --> Asynchronous call of task from start method
-                Truth.assertThat(location).isEqualTo(testLocation);
-                Truth.assertThat(classUnderTest.getLastLocation()).isEqualTo(testLocation);
-                verify(fusedLocationProviderClient, times(1)).getLastLocation();
-            }
+        ILocationListener locationListener = location -> {
+            //Then --> Asynchronous call of task from start method
+            Truth.assertThat(location).isEqualTo(testLocation);
+            Truth.assertThat(classUnderTest.getLastLocation()).isEqualTo(testLocation);
+            verify(fusedLocationProviderClient, times(1)).getLastLocation();
         };
         when(fusedLocationProviderClient.getLastLocation()).thenReturn(Tasks.forResult(testLocation));
+        when(preferenceManager.getLocationAccuracy()).thenReturn(LocationAccuracy.HIGH);
 
         // When
         classUnderTest.start(locationListener);
@@ -79,7 +79,8 @@ public class GoogleLocationServiceTest extends BaseUnitTest {
         // Then
         verify(fusedLocationProviderClient, times(1)).getLastLocation();
         verify(fusedLocationProviderClient, times(1))
-                .requestLocationUpdates(any(), any(LocationCallback.class), ArgumentMatchers.isNull());
+                .requestLocationUpdates(eq(LocationAccuracy.HIGH.getLocationRequest()),
+                        any(LocationCallback.class), ArgumentMatchers.isNull());
     }
 
     @Test
@@ -88,6 +89,7 @@ public class GoogleLocationServiceTest extends BaseUnitTest {
         ILocationListener locationListener = mock(ILocationListener.class);
         when(fusedLocationProviderClient.getLastLocation())
                 .thenReturn(Tasks.forException(new IOException("Test Exception")));
+        when(preferenceManager.getLocationAccuracy()).thenReturn(LocationAccuracy.HIGH);
 
         // When
         classUnderTest.start(locationListener);
@@ -97,7 +99,8 @@ public class GoogleLocationServiceTest extends BaseUnitTest {
         verifyZeroInteractions(locationListener);
         verify(fusedLocationProviderClient, times(1)).getLastLocation();
         verify(fusedLocationProviderClient, times(1))
-                .requestLocationUpdates(any(), any(LocationCallback.class), ArgumentMatchers.isNull());
+                .requestLocationUpdates(eq(LocationAccuracy.HIGH.getLocationRequest()),
+                        any(LocationCallback.class), ArgumentMatchers.isNull());
     }
 
     @Test
@@ -130,6 +133,9 @@ public class GoogleLocationServiceTest extends BaseUnitTest {
 
     @Test
     public void testCheckSettings() {
+        // Given
+        when(preferenceManager.getLocationAccuracy()).thenReturn(LocationAccuracy.HIGH);
+
         // When
         classUnderTest.checkSettings();
 

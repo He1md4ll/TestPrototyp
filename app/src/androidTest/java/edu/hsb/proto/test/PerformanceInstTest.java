@@ -31,7 +31,7 @@ import static org.hamcrest.Matchers.not;
 @LargeTest
 public class PerformanceInstTest extends BaseUITest {
 
-    private static final int BASE_LOGIN_SPEED = 2; // seconds
+    private static final int BASE_LOGIN_TEST_SPEED = 2; // seconds
     private static final int MAX_HASH_TIME = 1; // seconds
 
     @Rule
@@ -41,7 +41,7 @@ public class PerformanceInstTest extends BaseUITest {
     public Tracing methodTracing = new Tracing();
 
     @Rule
-    public Timeout timeout = new Timeout(BASE_LOGIN_SPEED + MAX_HASH_TIME, TimeUnit.SECONDS);
+    public Timeout timeout = new Timeout(BASE_LOGIN_TEST_SPEED + MAX_HASH_TIME, TimeUnit.SECONDS);
 
     @Override
     protected void inject(UITestComponent component) {}
@@ -80,6 +80,28 @@ public class PerformanceInstTest extends BaseUITest {
         // Given
         int rounds = 50000;
         boolean enc = Boolean.FALSE;
+
+        // When
+        onView(withId(R.id.login_username)).perform(replaceText(DefaultLoginService.RIGHT_USERNAME));
+        onView(withId(R.id.login_password)).perform(replaceText(DefaultLoginService.RIGHT_PASSWORD));
+        onView(withId(R.id.login_rounds)).perform(setProgress(rounds));
+        if (enc) {
+            onView(withId(R.id.login_encryption)).perform(click());
+        }
+        onView(withId(R.id.login_offline_button)).perform(click());
+
+        // Then
+        String expectedResult = "Result: true";
+        onView(withText(expectedResult))
+                .inRoot(withDecorView(not(getMainActivity().getWindow().getDecorView())))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testHashPerformance50000Enc() {
+        // Given
+        int rounds = 50000;
+        boolean enc = Boolean.TRUE;
 
         // When
         onView(withId(R.id.login_username)).perform(replaceText(DefaultLoginService.RIGHT_USERNAME));

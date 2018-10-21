@@ -19,6 +19,7 @@ import org.junit.Test;
 import javax.inject.Inject;
 
 import edu.hsb.proto.test.base.BaseUITest;
+import edu.hsb.proto.test.base.TestUtils;
 import edu.hsb.proto.test.base.UITestComponent;
 import edu.hsb.proto.test.service.impl.DefaultLoginService;
 

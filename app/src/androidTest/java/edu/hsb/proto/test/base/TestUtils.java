@@ -1,4 +1,4 @@
-package edu.hsb.proto.test;
+package edu.hsb.proto.test.base;
 
 import java.util.Random;
 

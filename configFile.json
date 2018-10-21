@@ -1,0 +1,43 @@
+{
+	"cloudURL": "cobatest.perfectomobile.com",
+	"securityToken": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJmcXhOTUtZajhPOXFWSmdIZzdqcnBnQ1laT0lyNnJkbk5GeW5qWnVaYmM0In0.eyJqdGkiOiJmMGYwZWI3NS00ZWUzLTRkNGEtYTRhNC00OWE3YTI5Yzk5NjEiLCJleHAiOjAsIm5iZiI6MCwiaWF0IjoxNTM5OTYxOTEzLCJpc3MiOiJodHRwczovL2F1dGgucGVyZmVjdG9tb2JpbGUuY29tL2F1dGgvcmVhbG1zL2NvYmF0ZXN0LXBlcmZlY3RvbW9iaWxlLWNvbSIsImF1ZCI6Im9mZmxpbmUtdG9rZW4tZ2VuZXJhdG9yIiwic3ViIjoiMjNmMjU5MTEtMDk4MC00ZWNiLTk2MGYtNzQ4NGJiNTM2NGMzIiwidHlwIjoiT2ZmbGluZSIsImF6cCI6Im9mZmxpbmUtdG9rZW4tZ2VuZXJhdG9yIiwiYXV0aF90aW1lIjowLCJzZXNzaW9uX3N0YXRlIjoiZWE5OTc0NDQtMDY5MS00YTY0LThiNGEtN2U3NmZhN2M0NGEyIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fX0.JtMy6elCR91VMp13yjQkU0Q2W75mx8GGkPL1VurYytiVSJE5Tybr3rOBvi3_G8jducm6ojS5pxB3WPqBCS-48nE5fpFyoZhhZDssIdZcjMu3LzhPOhKKnrNPN6V0N46M08ksawIQ_EdRFggIFeUOwqcIMtFPuRroWDI94FNz6aAFHg57OlsT9Vz-wJXioQPJ2lTcoXhbv8vUYkO6wnWFfXho9ywwlpmUSxq8pSUYRWx7aWufFX09_370FZ1ZkHY9y-C1Qq3yFgTlERu6BjYMfZy-VixvvaTpu_adQAIyer1bzJgFiwURa3labCKzTC_GSSFmTaymdmwDD1-UgkznXA",
+	"devices": [
+		{
+			"platformName": "Android",
+			"platformVersion": "^[6789].*",
+			"location": "EU-DE-FRA"
+		},
+		{
+			"platformName": "Android",
+			"platformVersion": "^[6789].*",
+			"location": "EU-DE-FRA"
+		},
+		{
+			"platformName": "Android",
+			"platformVersion": "^[6789].*",
+			"location": "EU-DE-FRA"
+		}
+	],
+	"acquireDeviceRetryNumber" : 3,
+	"vitalsMonitoring": {
+		"vitals": ["outputs.monitors.memory.used", "outputs.monitors.cpu.total"],
+		"interval": 10
+	},
+	"androidOrchestrator" : true,
+	"apkName": "TestPrototyp",
+	"testApkPath": "./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+	"testClassNames": ["edu.hsb.proto.test.InjectionInstTest", "edu.hsb.proto.test.LoginInstTest"],
+	"apkPath": "./app/build/outputs/apk/debug/app-debug.apk",
+	"tags": [
+		"espresso", "plugin"
+	],
+	"postExecution": {
+		"setUninstall": true
+    },
+	"installationDetails": {
+		"preCleanUp": true
+	},
+	"takeScreenshotOnTestFailure": true,
+	"takeScreenshotOnTestEnd": true,
+	"projectName" : "Master Thesis: Test automation in Android"
+}

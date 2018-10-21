@@ -10,9 +10,11 @@ import org.junit.Test;
 
 import javax.inject.Inject;
 
+import edu.hsb.proto.test.PreferenceManager;
 import edu.hsb.proto.test.base.BaseUnitTest;
 import edu.hsb.proto.test.base.RealWithMocks;
 import edu.hsb.proto.test.base.UnitTestComponent;
+import edu.hsb.proto.test.domain.LocationAccuracy;
 import edu.hsb.proto.test.service.ILocationListener;
 import edu.hsb.proto.test.service.ILocationService;
 
@@ -30,6 +32,9 @@ public class InjectionTest extends BaseUnitTest {
 
     @Inject
     FusedLocationProviderClient fusedLocationProviderClient;
+
+    @Inject
+    PreferenceManager preferenceManager;
 
     @RealWithMocks
     @Inject
@@ -63,6 +68,7 @@ public class InjectionTest extends BaseUnitTest {
             }
         };
         when(fusedLocationProviderClient.getLastLocation()).thenReturn(Tasks.forResult(testLocation));
+        when(preferenceManager.getLocationAccuracy()).thenReturn(LocationAccuracy.HIGH);
 
         // When
         locationServiceReal.start(locationListener);
