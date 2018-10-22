@@ -6,16 +6,6 @@
 			"platformName": "Android",
 			"platformVersion": "^[6789].*",
 			"location": "EU-DE-FRA"
-		},
-		{
-			"platformName": "Android",
-			"platformVersion": "^[6789].*",
-			"location": "EU-DE-FRA"
-		},
-		{
-			"platformName": "Android",
-			"platformVersion": "^[6789].*",
-			"location": "EU-DE-FRA"
 		}
 	],
 	"acquireDeviceRetryNumber" : 3,
@@ -26,7 +16,7 @@
 	"androidOrchestrator" : true,
 	"apkName": "TestPrototyp",
 	"testApkPath": "./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
-	"testClassNames": ["edu.hsb.proto.test.InjectionInstTest", "edu.hsb.proto.test.LoginInstTest"],
+	"testClassNames": ["edu.hsb.proto.test.InjectionInstTest"],
 	"apkPath": "./app/build/outputs/apk/debug/app-debug.apk",
 	"tags": [
 		"espresso", "plugin"
