@@ -58,6 +58,19 @@ public class PreferenceManagerTest extends BaseUnitTest {
     }
 
     @Test
+    public void testSetPreferenceEmpty() {
+        // When
+        final Task task = classUnderTest.setUsername("");
+
+        // Then
+        task.addOnCompleteListener(task1 -> {
+            Truth.assertThat(task1.isSuccessful()).isTrue();
+            Truth.assertThat(sharedPreferences.getAll())
+                    .containsEntry(PreferenceManager.PREF_USERNAME, "");
+        });
+    }
+
+    @Test
     public void testSetPreferenceNull() {
         // When
         final Task task = classUnderTest.setUsername(null);
@@ -65,8 +78,7 @@ public class PreferenceManagerTest extends BaseUnitTest {
         // Then
         task.addOnCompleteListener(task1 -> {
             Truth.assertThat(task1.isSuccessful()).isTrue();
-            Truth.assertThat(sharedPreferences.getAll())
-                    .containsEntry(PreferenceManager.PREF_USERNAME, null);
+            Truth.assertThat(sharedPreferences.getAll()).isEmpty();
         });
     }
 }

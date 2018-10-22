@@ -6,14 +6,9 @@ import android.content.SharedPreferences;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import edu.hsb.proto.test.domain.LocationAccuracy;
 
 public class PreferenceManager {
-
-    public static final ExecutorService PREFERENCE_EXECUTOR = Executors.newSingleThreadExecutor();
 
     public static final String PREF_ACCURACY = "pref_accuracy";
     public static final String PREF_USERNAME = "pref_username";
@@ -54,7 +49,7 @@ public class PreferenceManager {
     }
 
     private Task<Void> apply(SharedPreferences.Editor editor) {
-        return Tasks.call(PREFERENCE_EXECUTOR, () -> {
+        return Tasks.call(() -> {
             editor.commit();
             return null;
         });
